@@ -1,5 +1,7 @@
 # Retail Sales Management System
 
+# Hosted URL - https://retail-sales-app.onrender.com/
+
 A full-stack MERN (MongoDB, Express, React, Node.js) application for managing and analyzing retail sales data with advanced search, filtering, sorting, and pagination capabilities.
 
 ## Features
