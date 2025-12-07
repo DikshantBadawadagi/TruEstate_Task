@@ -1,17 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../styles/SearchBar.css';
 
 const SearchBar = ({ value, onChange }) => {
   const [searchTerm, setSearchTerm] = useState(value);
+  const isFirstRender = useRef(true);
+
+  // Update local state when prop changes
+  useEffect(() => {
+    setSearchTerm(value);
+  }, [value]);
 
   // Debounce search input
   useEffect(() => {
+    // Skip on first render
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
     const timer = setTimeout(() => {
-      onChange(searchTerm);
+      if (searchTerm !== value) {
+        onChange(searchTerm);
+      }
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [searchTerm, onChange]);
+  }, [searchTerm]);
 
   return (
     <div className="search-bar">

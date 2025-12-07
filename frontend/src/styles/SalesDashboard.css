@@ -39,8 +39,8 @@
 }
 
 .main-section {
-  display: grid;
-  grid-template-columns: 280px 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 1.5rem;
 }
 
@@ -49,9 +49,7 @@
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  height: fit-content;
-  position: sticky;
-  top: 2rem;
+  width: 100%;
 }
 
 .table-section {
@@ -67,16 +65,6 @@
   font-size: 0.9rem;
 }
 
-@media (max-width: 1024px) {
-  .main-section {
-    grid-template-columns: 1fr;
-  }
-
-  .filter-sidebar {
-    position: static;
-  }
-}
-
 @media (max-width: 768px) {
   .controls-section {
     flex-direction: column;
@@ -85,5 +73,9 @@
 
   .dashboard-container {
     padding: 1rem;
+  }
+
+  .filter-groups-container {
+    grid-template-columns: 1fr;
   }
 }

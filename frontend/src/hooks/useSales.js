@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import apiService from '../services/apiService';
 
 export const useSales = () => {
@@ -26,8 +26,9 @@ export const useSales = () => {
     limit: 10
   });
 
-  // Stringify filters for stable comparison
-  const filtersString = JSON.stringify(filters);
+  // Track the last fetched filters to prevent duplicate requests
+  const lastFetchedFiltersRef = useRef('');
+  const isMountedRef = useRef(false);
 
   // Fetch filter options on mount
   useEffect(() => {
@@ -41,19 +42,29 @@ export const useSales = () => {
     };
 
     fetchFilterOptions();
+    isMountedRef.current = true;
   }, []);
 
   // Fetch sales data whenever filters change
   useEffect(() => {
+    if (!isMountedRef.current) return;
+
+    const filtersString = JSON.stringify(filters);
+    
+    // Don't fetch if filters haven't actually changed
+    if (filtersString === lastFetchedFiltersRef.current) {
+      return;
+    }
+
     const fetchSales = async () => {
       setLoading(true);
       setError(null);
 
       try {
-        const parsedFilters = JSON.parse(filtersString);
-        const response = await apiService.getSales(parsedFilters);
+        const response = await apiService.getSales(filters);
         setSales(response.data);
         setPagination(response.pagination);
+        lastFetchedFiltersRef.current = filtersString;
       } catch (err) {
         setError(err.message);
         console.error('Error fetching sales:', err);
@@ -63,8 +74,9 @@ export const useSales = () => {
     };
 
     fetchSales();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filtersString]); // Only depend on the stringified version
+  }, [filters.search, filters.regions, filters.genders, filters.ageMin, filters.ageMax, 
+      filters.categories, filters.tags, filters.paymentMethods, filters.dateFrom, 
+      filters.dateTo, filters.sortBy, filters.sortOrder, filters.page, filters.limit]);
 
   // Update individual filter
   const updateFilter = useCallback((key, value) => {
@@ -109,22 +121,10 @@ export const useSales = () => {
   }, [pagination?.hasPrevPage]);
 
   // Manual refetch function
-  const refetch = useCallback(async () => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const parsedFilters = JSON.parse(filtersString);
-      const response = await apiService.getSales(parsedFilters);
-      setSales(response.data);
-      setPagination(response.pagination);
-    } catch (err) {
-      setError(err.message);
-      console.error('Error fetching sales:', err);
-    } finally {
-      setLoading(false);
-    }
-  }, [filtersString]);
+  const refetch = useCallback(() => {
+    lastFetchedFiltersRef.current = ''; // Force refetch
+    setFilters(prev => ({ ...prev })); // Trigger useEffect
+  }, []);
 
   return {
     sales,
