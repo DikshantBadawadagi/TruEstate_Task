@@ -1,9 +1,7 @@
 const Sale = require('../models/Sale');
 
 class SalesService {
-  /**
-   * Get sales with search, filters, sorting, and pagination
-   */
+
   async getSales(params) {
     const {
       search = '',
@@ -24,12 +22,10 @@ class SalesService {
 
     const query = {};
 
-    // 1. Full-Text Search (Customer Name or Phone Number)
     if (search && search.trim() !== '') {
       query.$text = { $search: search.trim() };
     }
 
-    // 2. Filters
     if (regions.length > 0) {
       query.customerRegion = { $in: regions };
     }
@@ -62,7 +58,6 @@ class SalesService {
       if (dateTo) query.date.$lte = new Date(dateTo);
     }
 
-    // 3. Sorting
     const sortOptions = {};
     switch (sortBy) {
       case 'date':
@@ -78,10 +73,8 @@ class SalesService {
         sortOptions.date = -1;
     }
 
-    // 4. Pagination
     const skip = (page - 1) * limit;
 
-    // Execute query
     const [sales, totalCount] = await Promise.all([
       Sale.find(query)
         .sort(sortOptions)
@@ -104,9 +97,7 @@ class SalesService {
     };
   }
 
-  /**
-   * Get filter options (distinct values for dropdowns)
-   */
+
   async getFilterOptions() {
     const [regions, genders, categories, tags, paymentMethods] = await Promise.all([
       Sale.distinct('customerRegion'),
@@ -125,9 +116,7 @@ class SalesService {
     };
   }
 
-  /**
-   * Get statistics for dashboard
-   */
+
   async getStatistics(filters = {}) {
     const query = this._buildFilterQuery(filters);
 

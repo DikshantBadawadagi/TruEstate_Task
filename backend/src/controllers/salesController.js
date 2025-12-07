@@ -1,10 +1,7 @@
 const salesService = require('../services/salesService');
 
 class SalesController {
-  /**
-   * GET /api/sales
-   * Get sales with search, filters, sorting, pagination
-   */
+
   async getSales(req, res) {
     try {
       const params = {
@@ -41,10 +38,7 @@ class SalesController {
     }
   }
 
-  /**
-   * GET /api/sales/filters
-   * Get available filter options
-   */
+
   async getFilterOptions(req, res) {
     try {
       const options = await salesService.getFilterOptions();
@@ -63,10 +57,7 @@ class SalesController {
     }
   }
 
-  /**
-   * GET /api/sales/statistics
-   * Get sales statistics
-   */
+
   async getStatistics(req, res) {
     try {
       const filters = {

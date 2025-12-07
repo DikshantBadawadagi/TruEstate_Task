@@ -5,14 +5,11 @@ const SearchBar = ({ value, onChange }) => {
   const [searchTerm, setSearchTerm] = useState(value);
   const isFirstRender = useRef(true);
 
-  // Update local state when prop changes
   useEffect(() => {
     setSearchTerm(value);
   }, [value]);
 
-  // Debounce search input
   useEffect(() => {
-    // Skip on first render
     if (isFirstRender.current) {
       isFirstRender.current = false;
       return;

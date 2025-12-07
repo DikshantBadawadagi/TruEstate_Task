@@ -1,15 +1,10 @@
-// In production, API calls go to the same origin (no need for full URL)
-// In development, use the VITE_API_URL from .env
 const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
 class ApiService {
-  /**
-   * Fetch sales data with filters, search, sort, pagination
-   */
+
   async getSales(params) {
     const queryParams = new URLSearchParams();
 
-    // Add all parameters to query string
     if (params.search) queryParams.append('search', params.search);
     if (params.regions?.length) queryParams.append('regions', params.regions.join(','));
     if (params.genders?.length) queryParams.append('genders', params.genders.join(','));
@@ -34,9 +29,7 @@ class ApiService {
     return response.json();
   }
 
-  /**
-   * Fetch filter options
-   */
+
   async getFilterOptions() {
     const response = await fetch(`${API_BASE_URL}/sales/filters`);
     
@@ -47,9 +40,7 @@ class ApiService {
     return response.json();
   }
 
-  /**
-   * Fetch statistics
-   */
+
   async getStatistics(filters) {
     const queryParams = new URLSearchParams();
 

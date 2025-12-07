@@ -4,7 +4,6 @@ const saleSchema = new mongoose.Schema({
   transactionId: { type: Number, required: true, unique: true },
   date: { type: Date, required: true },
   
-  // Customer Fields
   customerId: { type: String, required: true, index: true },
   customerName: { type: String, required: true, index: true },
   phoneNumber: { type: String, required: true, index: true },
@@ -13,21 +12,18 @@ const saleSchema = new mongoose.Schema({
   customerRegion: { type: String, required: true, index: true },
   customerType: { type: String, required: true },
   
-  // Product Fields
   productId: { type: String, required: true },
   productName: { type: String, required: true },
   brand: { type: String, required: true },
   productCategory: { type: String, required: true, index: true },
   tags: [{ type: String, index: true }],
   
-  // Sales Fields
   quantity: { type: Number, required: true, index: true },
   pricePerUnit: { type: Number, required: true },
   discountPercentage: { type: Number, required: true },
   totalAmount: { type: Number, required: true },
   finalAmount: { type: Number, required: true },
   
-  // Operational Fields
   paymentMethod: { type: String, required: true, index: true },
   orderStatus: { type: String, required: true },
   deliveryType: { type: String, required: true },
@@ -39,12 +35,10 @@ const saleSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Compound indexes for common query patterns
 saleSchema.index({ date: -1, quantity: -1 });
 saleSchema.index({ customerName: 1, phoneNumber: 1 });
 saleSchema.index({ customerRegion: 1, gender: 1, productCategory: 1 });
 
-// Text index for full-text search on customer name and phone
 saleSchema.index({ 
   customerName: 'text', 
   phoneNumber: 'text' 

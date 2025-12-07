@@ -12,14 +12,12 @@ const importCSV = async (filePath) => {
     fs.createReadStream(filePath)
       .pipe(csv())
       .on('data', (row) => {
-        // Parse tags - split by comma if string
         const tags = row.Tags ? row.Tags.split(',').map(t => t.trim()) : [];
         
         const saleData = {
           transactionId: parseInt(row['Transaction ID']),
           date: new Date(row.Date),
           
-          // Customer
           customerId: row['Customer ID'],
           customerName: row['Customer Name'],
           phoneNumber: row['Phone Number'],
@@ -28,21 +26,18 @@ const importCSV = async (filePath) => {
           customerRegion: row['Customer Region'],
           customerType: row['Customer Type'],
           
-          // Product
           productId: row['Product ID'],
           productName: row['Product Name'],
           brand: row.Brand,
           productCategory: row['Product Category'],
           tags,
           
-          // Sales
           quantity: parseInt(row.Quantity),
           pricePerUnit: parseFloat(row['Price per Unit']),
           discountPercentage: parseFloat(row['Discount Percentage']),
           totalAmount: parseFloat(row['Total Amount']),
           finalAmount: parseFloat(row['Final Amount']),
           
-          // Operational
           paymentMethod: row['Payment Method'],
           orderStatus: row['Order Status'],
           deliveryType: row['Delivery Type'],
@@ -54,7 +49,6 @@ const importCSV = async (filePath) => {
         
         sales.push(saleData);
         
-        // Batch insert when we reach batchSize
         if (sales.length >= batchSize) {
           const batch = sales.splice(0, batchSize);
           Sale.insertMany(batch, { ordered: false })
@@ -68,7 +62,6 @@ const importCSV = async (filePath) => {
         }
       })
       .on('end', async () => {
-        // Insert remaining records
         if (sales.length > 0) {
           try {
             await Sale.insertMany(sales, { ordered: false });

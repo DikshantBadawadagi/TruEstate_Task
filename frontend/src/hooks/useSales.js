@@ -8,7 +8,6 @@ export const useSales = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Filter and search state
   const [filters, setFilters] = useState({
     search: '',
     regions: [],
@@ -26,11 +25,9 @@ export const useSales = () => {
     limit: 10
   });
 
-  // Track the last fetched filters to prevent duplicate requests
   const lastFetchedFiltersRef = useRef('');
   const isMountedRef = useRef(false);
 
-  // Fetch filter options on mount
   useEffect(() => {
     const fetchFilterOptions = async () => {
       try {
@@ -45,13 +42,11 @@ export const useSales = () => {
     isMountedRef.current = true;
   }, []);
 
-  // Fetch sales data whenever filters change
   useEffect(() => {
     if (!isMountedRef.current) return;
 
     const filtersString = JSON.stringify(filters);
     
-    // Don't fetch if filters haven't actually changed
     if (filtersString === lastFetchedFiltersRef.current) {
       return;
     }
@@ -78,7 +73,6 @@ export const useSales = () => {
       filters.categories, filters.tags, filters.paymentMethods, filters.dateFrom, 
       filters.dateTo, filters.sortBy, filters.sortOrder, filters.page, filters.limit]);
 
-  // Update individual filter
   const updateFilter = useCallback((key, value) => {
     setFilters(prev => ({
       ...prev,
@@ -87,7 +81,6 @@ export const useSales = () => {
     }));
   }, []);
 
-  // Reset all filters
   const resetFilters = useCallback(() => {
     setFilters({
       search: '',
@@ -107,7 +100,6 @@ export const useSales = () => {
     });
   }, []);
 
-  // Pagination helpers
   const goToNextPage = useCallback(() => {
     if (pagination?.hasNextPage) {
       setFilters(prev => ({ ...prev, page: prev.page + 1 }));
@@ -120,10 +112,9 @@ export const useSales = () => {
     }
   }, [pagination?.hasPrevPage]);
 
-  // Manual refetch function
   const refetch = useCallback(() => {
-    lastFetchedFiltersRef.current = ''; // Force refetch
-    setFilters(prev => ({ ...prev })); // Trigger useEffect
+    lastFetchedFiltersRef.current = ''; 
+    setFilters(prev => ({ ...prev })); 
   }, []);
 
   return {

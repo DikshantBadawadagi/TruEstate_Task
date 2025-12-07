@@ -24,12 +24,10 @@ const SalesDashboard = () => {
   return (
     <div className="dashboard-container">
       <header className="dashboard-header">
-        <h1>Retail Sales Management System</h1>
-        <p>Advanced search, filtering, and analytics dashboard</p>
+        <h1>Sales Management System</h1>
       </header>
 
       <div className="dashboard-content">
-        {/* Search and Controls */}
         <div className="controls-section">
           <SearchBar 
             value={filters.search}
@@ -45,7 +43,6 @@ const SalesDashboard = () => {
         </div>
 
         <div className="main-section">
-          {/* Filter Panel */}
           <aside className="filter-sidebar">
             <FilterPanel
               filters={filters}
@@ -55,7 +52,6 @@ const SalesDashboard = () => {
             />
           </aside>
 
-          {/* Sales Table */}
           <main className="table-section">
             {loading && <div className="loading">Loading sales data...</div>}
             
