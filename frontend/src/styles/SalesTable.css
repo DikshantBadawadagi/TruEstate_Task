@@ -1,0 +1,112 @@
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.sales-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.sales-table thead {
+  background: #f7fafc;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.sales-table th {
+  padding: 1rem 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  color: #4a5568;
+  white-space: nowrap;
+}
+
+.sales-table tbody tr {
+  border-bottom: 1px solid #e2e8f0;
+  transition: background-color 0.2s;
+}
+
+.sales-table tbody tr:hover {
+  background-color: #f7fafc;
+}
+
+.sales-table td {
+  padding: 1rem 0.75rem;
+  color: #2d3748;
+}
+
+.customer-cell {
+  min-width: 180px;
+}
+
+.customer-name {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.customer-meta {
+  font-size: 0.75rem;
+  color: #718096;
+}
+
+.product-cell {
+  min-width: 200px;
+}
+
+.product-name {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.product-brand {
+  font-size: 0.75rem;
+  color: #718096;
+}
+
+.category-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: #ebf8ff;
+  color: #2c5282;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.quantity-cell {
+  text-align: center;
+  font-weight: 600;
+}
+
+.final-amount-cell {
+  font-weight: 600;
+  color: #38a169;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.status-completed {
+  background: #c6f6d5;
+  color: #22543d;
+}
+
+.status-pending {
+  background: #feebc8;
+  color: #7c2d12;
+}
+
+.status-cancelled {
+  background: #fed7d7;
+  color: #742a2a;
+}
+
+.status-shipped {
+  background: #bee3f8;
+  color: #2a4365;
+}

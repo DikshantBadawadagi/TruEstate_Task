@@ -1,0 +1,81 @@
+.filter-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.filter-header h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.reset-btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  color: #e53e3e;
+  background: transparent;
+  border: 1px solid #e53e3e;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.reset-btn:hover {
+  background: #fff5f5;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.filter-group label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+.range-inputs,
+.date-inputs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.range-input,
+.date-input {
+  flex: 1;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.range-input:focus,
+.date-input:focus {
+  border-color: #4299e1;
+}
+
+.range-inputs span,
+.date-inputs span {
+  color: #a0aec0;
+  font-size: 0.875rem;
+}
+
+.filter-loading {
+  padding: 2rem;
+  text-align: center;
+  color: #a0aec0;
+}

@@ -1,0 +1,6 @@
+#add env from all directories
+**/.env
+#add env from root directory
+.env
+# add node modules from every directory
+**/node_modules
