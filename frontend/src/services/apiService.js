@@ -1,4 +1,6 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+// In production, API calls go to the same origin (no need for full URL)
+// In development, use the VITE_API_URL from .env
+const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
 class ApiService {
   /**
