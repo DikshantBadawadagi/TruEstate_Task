@@ -4,7 +4,7 @@ const Sale = require('../models/Sale');
 
 const importCSV = async (filePath) => {
   const sales = [];
-  const batchSize = 10000; // Process in batches for memory efficiency
+  const batchSize = 10000; 
   
   return new Promise((resolve, reject) => {
     let processed = 0;
@@ -78,7 +78,7 @@ const importCSV = async (filePath) => {
             console.error('Final batch error:', err.message);
           }
         }
-        console.log(`✅ CSV import completed! Total: ${processed} records`);
+        console.log(`CSV import completed! Total: ${processed} records`);
         resolve(processed);
       })
       .on('error', (err) => {

@@ -56,16 +56,16 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/retail_sa
   useUnifiedTopology: true
 })
   .then(() => {
-    console.log('✅ Connected to MongoDB');
+    console.log('Connected to MongoDB');
     
     // Start server
     app.listen(PORT, () => {
-      console.log(`🚀 Server running on port ${PORT}`);
-      console.log(`📊 API: http://localhost:${PORT}/api/sales`);
+      console.log(`Server running on port ${PORT}`);
+      console.log(`API: http://localhost:${PORT}/api/sales`);
     });
   })
   .catch((err) => {
-    console.error('❌ MongoDB connection error:', err);
+    console.error('MongoDB connection error:', err);
     process.exit(1);
   });
 
