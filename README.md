@@ -2,6 +2,8 @@
 
 # Hosted URL - https://retail-sales-app.onrender.com/
 
+(All the records are not pushed in the database due to 512MB limit of MongoDB, as of now only 3,60,000 records have been pushed from 10,00,000)
+
 A full-stack MERN (MongoDB, Express, React, Node.js) application for managing and analyzing retail sales data with advanced search, filtering, sorting, and pagination capabilities.
 
 ## Features
